@@ -1,0 +1,38 @@
+//Да се използва по-стара версия на библиотеката например 2.1
+
+#include <IRremote.h>
+
+const int RECV_PIN = 6;
+int result;
+
+IRrecv irrecv(RECV_PIN);
+decode_results results;
+
+void setup(){
+  Serial.begin(9600);
+  irrecv.enableIRIn();
+}
+
+void loop(){
+  if (irrecv.decode(&results)){
+        Serial.println(results.value, HEX);
+        irrecv.resume();     
+  }
+/*
+switch(results.value){
+
+  case 0xFF30CF:
+       
+      digitalWrite(redPin, HIGH);
+      digitalWrite(greenPin, LOW);
+      digitalWrite(bluePin, LOW);
+      break;
+  
+  case 0xFF18E7:
+      digitalWrite(redPin, LOW);
+      digitalWrite(greenPin, HIGH);
+      digitalWrite(bluePin, LOW);
+      break;
+  
+ } */
+}
